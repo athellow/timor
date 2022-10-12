@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cc6ce627ac2126ee1d551965968c145b",
+    "content-hash": "12841b7fa11f44cf5202478aea9a635d",
     "packages": [
         {
             "name": "league/flysystem",
@@ -728,6 +728,40 @@
                 "source": "https://github.com/top-think/think-worker/tree/v3.0.6"
             },
             "time": "2021-04-26T15:09:47+00:00"
+        },
+        {
+            "name": "workerman/channel",
+            "version": "v1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/walkor/channel.git",
+                "reference": "bf6d837705738d875162a7344818e1bf02e8cef2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/walkor/channel/zipball/bf6d837705738d875162a7344818e1bf02e8cef2",
+                "reference": "bf6d837705738d875162a7344818e1bf02e8cef2",
+                "shasum": ""
+            },
+            "require": {
+                "workerman/workerman": ">=3.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Channel\\": "./src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "homepage": "http://www.workerman.net",
+            "support": {
+                "issues": "https://github.com/walkor/channel/issues",
+                "source": "https://github.com/walkor/channel/tree/v1.0.6"
+            },
+            "time": "2020-10-19T02:04:29+00:00"
         },
         {
             "name": "workerman/gateway-worker",
