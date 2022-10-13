@@ -29,6 +29,7 @@ return [
     'count'          => 4,
     'daemonize'      => false,
     'pidFile'        => '',
+    // 'stdoutFile'     => runtime_path('log').'workerman.log',
 
     // 支持事件回调
     // onWorkerStart

@@ -5,6 +5,7 @@ namespace timor\services\workerman\services;
 
 use think\worker\Server;
 use timor\services\workerman\WorkermanService;
+use Workerman\Worker;
 
 class WorkerService extends Server
 {
@@ -23,6 +24,14 @@ class WorkerService extends Server
         $this->config = config('worker_server');
         $config = $this->config['worker'] ?? [];
         
+        // 全局静态属性
+        $staticConf = ['stdoutFile', 'daemonize', 'pidFile', 'logFile'];
+        foreach ($staticConf as $name) {
+            if (!empty($this->config[$name])) {
+                Worker::${$name} = $this->config[$name];
+            }
+        }
+
         if (!empty($config['socket'])) {
             $this->socket = $config['socket'];
         } else {
