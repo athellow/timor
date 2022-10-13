@@ -19,7 +19,10 @@ return [
     'port'           => 2345, // 监听端口
     'socket'         => '', // 完整监听地址
     'context'        => [], // socket 上下文选项
-    'worker_class'   => '', // 自定义Workerman服务类名 支持数组定义多个服务
+    'worker_class'   => [
+        \timor\services\workerman\services\WorkerService::class,
+        \timor\services\workerman\services\ChannelService::class,
+    ], // 自定义Workerman服务类名 支持数组定义多个服务
 
     // 支持workerman的所有配置参数
     'name'           => 'thinkphp',
@@ -52,4 +55,44 @@ return [
     'onError'        => function ($connection, $code, $msg) {
         echo "error [ $code ] $msg\n";
     },
+
+    // 自定义服务类相关配置
+    'worker' => [
+        // 协议
+        'protocol' => 'websocket',
+        // 监听地址
+        'host' => '0.0.0.0',
+        // 监听端口
+        'port' => 2345,
+        'option' => [
+            // 当前Worker实例启动进程数
+            'count' => 4,
+            // 支持3种(tcp、udp、ssl)  context 设置 ssl 时，这里配置成 ssl
+            'transport' => 'tcp',
+        ],
+        // 'context' => [
+        //     'ssl' => [
+        //         'local_cert' => realpath('public' . $confing['wss_local_cert']), // 绝对路径，可以是crt文件
+        //         'local_pk' => realpath('public' . $confing['wss_local_pk']),
+        //         'verify_peer' => false,
+        //     ],
+        // ],
+    ],
+
+    'chat' => [
+        'protocol' => 'websocket',
+        'host' => '0.0.0.0',
+        'port' => 2206,
+        'option' => [
+            // 当前Worker实例启动进程数
+            'count' => 1,
+        ],
+    ],
+
+    'channel' => [
+        // 内部通讯地址
+        'host' => '127.0.0.1',
+        // 内部通讯监听端口
+        'port' => 20012,
+    ],
 ];
