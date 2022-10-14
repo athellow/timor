@@ -21,6 +21,7 @@ return [
     'context'        => [], // socket 上下文选项
     'worker_class'   => [
         \timor\services\workerman\services\WorkerService::class,
+        \timor\services\workerman\services\ChatService::class,
         \timor\services\workerman\services\ChannelService::class,
     ], // 自定义Workerman服务类名 支持数组定义多个服务
 
@@ -29,7 +30,7 @@ return [
     'count'          => 4,
     'daemonize'      => false,
     'pidFile'        => '',
-    // 'stdoutFile'     => runtime_path('log').'workerman.log',
+    'stdoutFile'     => runtime_path('log').'workerman.log',
 
     // 支持事件回调
     // onWorkerStart
@@ -83,7 +84,7 @@ return [
     'chat' => [
         'protocol' => 'websocket',
         'host' => '0.0.0.0',
-        'port' => 2206,
+        'port' => 2346,
         'option' => [
             // 当前Worker实例启动进程数
             'count' => 1,
@@ -94,6 +95,6 @@ return [
         // 内部通讯地址
         'host' => '127.0.0.1',
         // 内部通讯监听端口
-        'port' => 20012,
+        'port' => 2206,
     ],
 ];

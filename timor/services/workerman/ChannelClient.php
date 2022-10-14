@@ -4,6 +4,7 @@ declare (strict_types = 1);
 namespace timor\services\workerman;
 
 use Channel\Client;
+use timor\services\workerman\callback\Callback;
 
 class ChannelClient
 {
@@ -72,19 +73,19 @@ class ChannelClient
      * 
      * @see https://www.workerman.net/doc/workerman/components/channel-client-on.html
      * @access public
-     * @param  WorkermanService $service 事件名称
+     * @param  Callback $callback
      * @param  string $name 事件名称
      */
-    public function on(WorkermanService $service, string $name)
+    public function on(Callback $callback, string $name)
     {
-        Client::on($name, function ($event_data) use ($service) {
-            if (!isset($event_data['type']) || !$event_data['type']) return;
+        Client::on($name, function ($event_data) use ($callback) {
+            if (!isset($event_data['action']) || !$event_data['action']) return;
             // 默认所有用户
-            $ids = !empty($event_data['ids']) ? $event_data['ids'] : array_keys($service->getUser());
+            $ids = !empty($event_data['ids']) ? $event_data['ids'] : array_keys($callback->getUser());
             
             foreach ($ids as $id) {
-                if ($conn = $service->getUser($id))
-                    $service->send($conn, $event_data['data'] ?? []);
+                if ($conn = $callback->getUser($id))
+                    $callback->job()->send($conn, $event_data['data'] ?? []);
             }
         });
     }
@@ -94,14 +95,14 @@ class ChannelClient
      * 
      * @access public
      * @see https://www.workerman.net/doc/workerman/components/channel-client-publish.html
-     * @param string $type 类型
+     * @param string $action 类型
      * @param array $data 数据
      * @param array $ids 用户 id，默认全部
      */
-    public function publish(string $type, ?array $data = [], ?array $ids = [])
+    public function publish(string $action, ?array $data = [], ?array $ids = [])
     {
         Client::publish($this->eventName, [
-            'type' => $type,
+            'action' => $action,
             'data' => $data,
             'ids' => $ids
         ]);

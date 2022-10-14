@@ -3,9 +3,9 @@ declare (strict_types = 1);
 
 namespace timor\services\workerman\services;
 
-use timor\services\workerman\callback\WorkerCallback;
+use timor\services\workerman\callback\ChatCallback;
 
-class WorkerService extends BaseService
+class ChatService extends BaseService
 {
     /**
      * 获取连接配置
@@ -14,7 +14,7 @@ class WorkerService extends BaseService
      */
     protected function getConnConf()
     {
-        return $this->config['worker'] ?? [];
+        return $this->config['chat'] ?? [];
     }
 
     /**
@@ -24,7 +24,7 @@ class WorkerService extends BaseService
      */
     protected function init()
     {
-        $callback = new WorkerCallback($this->worker);
+        $callback = new ChatCallback($this->worker);
         // 设置回调
         $this->setCallBack($callback);
     }
