@@ -25,7 +25,8 @@
         "topthink/think-orm": "^2.0",
         "topthink/think-multi-app": "^1.0",
         "topthink/think-worker": "^3.0",
-        "workerman/channel": "^1.0"
+        "workerman/channel": "^1.0",
+        "firebase/php-jwt": "^6.3"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2",
