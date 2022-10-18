@@ -8,7 +8,10 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
+
+use app\api\middleware\Auth;
 use think\facade\Route;
 
 
-Route::get('hello/[:name]', 'index/hello');
+Route::get('hello/[:name]', 'index/hello')->middleware(Auth::class);
+
