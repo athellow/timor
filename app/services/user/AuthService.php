@@ -6,8 +6,8 @@ namespace app\services\user;
 use app\model\user\User;
 use Firebase\JWT\ExpiredException;
 use think\facade\Event;
-use timor\Exception\ApiException;
-use timor\Exception\AuthException;
+use timor\exception\ApiException;
+use timor\exception\AuthException;
 use timor\services\JwtService;
 
 class AuthService

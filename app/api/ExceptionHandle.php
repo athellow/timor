@@ -7,8 +7,8 @@ use think\exception\Handle;
 use think\exception\HttpResponseException;
 use think\Response;
 use Throwable;
-use timor\Exception\ApiException;
-use timor\Exception\AuthException;
+use timor\exception\ApiException;
+use timor\exception\AuthException;
 
 class ExceptionHandle extends Handle
 {

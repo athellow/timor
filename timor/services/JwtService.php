@@ -6,7 +6,7 @@ namespace timor\services;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use think\facade\Cache;
-use timor\Exception\AuthException;
+use timor\exception\AuthException;
 
 class JwtService
 {
