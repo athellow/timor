@@ -1,10 +1,9 @@
 <?php
 namespace app\api\controller;
 
-use app\BaseController;
 use app\Request;
 
-class Index extends BaseController
+class Index extends Base
 {
     public function index()
     {

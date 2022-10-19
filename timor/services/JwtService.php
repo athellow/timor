@@ -63,7 +63,7 @@ class JwtService
     /**
      * 获取token
      * @access public
-     * @param int|string $id
+     * @param int $uid
      * @param string $type
      * @param array $params
      * @return array
@@ -87,6 +87,26 @@ class JwtService
         $token = JWT::encode($params, $this->key, 'HS256');
 
         return compact('token', 'params');
+    }
+
+    /**
+     * 获取refresh token
+     *
+     * @access public
+     * @param int $uid
+     * @param string $type
+     * @param array $params
+     * @return array
+     */
+    public function getRefreshToken(int $uid, string $type)
+    {
+        $time = time();
+
+        return $this->getToken($uid, $type, [
+            'iat' => $time,
+            'nbf' => $time,
+            'exp' => $time + $this->refreshTokenExp
+        ]);
     }
 
     /**
@@ -147,15 +167,9 @@ class JwtService
             }
         }
 
-        $time = time();
-
         return [
             'access_token'  => $this->getToken($uid, $type),
-            'refresh_token' => $this->getToken($uid, $type, [
-                'iat' => $time,
-                'nbf' => $time,
-                'exp' => $time + $this->refreshTokenExp
-            ]),
+            'refresh_token' => $this->getRefreshToken($uid, $type),
         ];
     }
 
@@ -277,5 +291,16 @@ class JwtService
         $micro = substr($time[0], 2, 3);
 
         return sha1($key . $time[1] . $micro . uniqid('jwt_' . $key, true));
+    }
+
+    /**
+     * 是否开启token刷新
+     *
+     * @access public
+     * @return bool
+     */
+    public function isEnableRefreshToken()
+    {
+        return $this->enableRefreshToken;
     }
 }

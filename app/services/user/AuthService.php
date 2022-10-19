@@ -3,23 +3,27 @@ declare (strict_types = 1);
 
 namespace app\services\user;
 
+use app\model\user\User;
+use think\facade\Event;
+use timor\Exception\ApiException;
 use timor\services\JwtService;
 
 class AuthService
 {
     /**
      * 构造方法
-    
+     * 
      * @access public
+     * @param $model
      */
-    public function __construct()
+    public function __construct(User $model)
     {
-        
+        $this->model = $model;
     }
 
     /**
      * 认证TOKEN
-    
+     * 
      * @access public
      * @param $token
      * @return bool|string|array
@@ -43,7 +47,60 @@ class AuthService
         // print_r($service->delRefreshBlacklist('3c95811d6c45186b6b93bd78ff99fd942c34fd99'));exit;
         //设置解析token
         $payload = $service->checkToken($token);
-        // print_r($payload);exit;
-        return $payload;
+
+        $user = $this->model->find($payload->uid);
+
+        return $user;
+    }
+
+    /**
+     * 登录
+     *
+     * @access public
+     * @param  string param 参数
+     * @param  string param 参数
+     * @return array
+     * @throws ApiException
+     */
+    public function login($username, $password): array
+    {
+        $user = $this->model->where('username', '=', $username)->findOrEmpty();
+
+        if ($user->isEmpty()) {
+            throw new ApiException('用户不存在');
+        }
+
+        $verify = password_verify($password, base64_decode($user->password));
+        if (!$verify) {
+            throw new ApiException('密码错误');
+        }
+
+        // 检查是否被冻结
+        if ($user->status !== 1) {
+            throw new ApiException('账号被冻结');
+        }
+
+        // 用户登录事件
+        // Event::trigger('UserLogin', $user);
+        // TaskJob::dispatchDo('emptyYesterdayAttachment');
+        
+        /** @var JwtService $service */
+        $service = app()->make(JwtService::class);
+        
+        $token = $service->getToken($user->id, 'api');
+
+        $data = [
+            'token' => $token['token'],
+            'token_exp_time' => $token['params']['exp']
+        ];
+
+        if ($service->isEnableRefreshToken()) {
+            $refresh_token = $service->getRefreshToken($user->id, 'api');
+
+            $data['refresh_token'] = $refresh_token['token'];
+            $data['refresh_token_exp_time'] = $refresh_token['params']['exp'];
+        }
+
+        return $data;
     }
 }

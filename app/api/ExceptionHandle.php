@@ -7,6 +7,8 @@ use think\exception\Handle;
 use think\exception\HttpResponseException;
 use think\Response;
 use Throwable;
+use timor\Exception\ApiException;
+use timor\Exception\AuthException;
 
 class ExceptionHandle extends Handle
 {
@@ -33,19 +35,24 @@ class ExceptionHandle extends Handle
      */
     public function render($request, Throwable $e): Response
     {
+        $data = app()->isDebug() ? [
+            'file'      => $e->getFile(),
+            'line'      => $e->getLine(),
+            'previous'  => $e->getPrevious(),
+            'trace'     => $e->getTrace()
+        ] : [];
+
         if ($e instanceof HttpResponseException) {
             return parent::render($request, $e);
+        } elseif ($e instanceof AuthException || $e instanceof ApiException) {
+            return api_error($e->getMessage(), $data, $e->getCode() ?: 400);
         } else {
-            $data = app()->isDebug() ? [
+            $data = app()->isDebug() ? array_merge([
                 'code'      => $e->getCode(),
                 'msg'       => $e->getMessage(),
-                'file'      => $e->getFile(),
-                'line'      => $e->getLine(),
-                'previous'  => $e->getPrevious(),
-                'trace'     => $e->getTrace()
-            ] : [];
+            ], $data) : [];
 
-            return json($data);
+            return api_error('系统错误', $data);
         }
     }
 }
