@@ -13,9 +13,9 @@ use app\api\middleware\Auth;
 use think\facade\Route;
 
 Route::group('v1', function () {
-    Route::group(function () {
-        Route::post('login', 'Auth/login')->name('login');
+    Route::post('login', 'Auth/login')->name('login');
 
+    Route::group(function () {
         Route::get('hello/[:name]', 'Index/hello');
 
     })->middleware(Auth::class);
