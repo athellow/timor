@@ -119,19 +119,15 @@ class JwtService
      */
     public function checkToken($token)
     {
-        try {
-            JWT::$leeway = 60;
-            $payload = JWT::decode($token, new Key($this->key, 'HS256'));
+        JWT::$leeway = 60;
+        $payload = JWT::decode($token, new Key($this->key, 'HS256'));
 
-            // 开启了刷新token和重复使用检查，判断是否需要重新登录
-            if ($this->enableRefreshToken && $this->reuseCheck && $this->needLoginAgain($payload)) {
-                throw  new AuthException('需重新登录');
-            }
-
-            return $payload;
-        } catch (\Exception $e) {
-            throw  new AuthException($e->getMessage());
+        // 开启了刷新token和重复使用检查，判断是否需要重新登录
+        if ($this->enableRefreshToken && $this->reuseCheck && $this->needLoginAgain($payload)) {
+            throw  new AuthException('需重新登录');
         }
+
+        return $payload;
     }
 
     /**

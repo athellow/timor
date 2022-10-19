@@ -4,8 +4,10 @@ declare (strict_types = 1);
 namespace app\services\user;
 
 use app\model\user\User;
+use Firebase\JWT\ExpiredException;
 use think\facade\Event;
 use timor\Exception\ApiException;
+use timor\Exception\AuthException;
 use timor\services\JwtService;
 
 class AuthService
@@ -27,15 +29,14 @@ class AuthService
      * @access public
      * @param $token
      * @return bool|string|array
-     * @throws Exception
+     * @throws ExpiredException
+     * @throws AuthException
      */
     public function checkToken($token)
     {
         /** @var JwtService $service */
         $service = app()->make(JwtService::class);
         
-        // 创建token
-        // print_r($service->getToken(1, 'api'));exit;
         // 设置需要重新登录
         // print_r($service->setLoginAgain('3c95811d6c45186b6b93bd78ff99fd942c34fd99'));exit;
         // print_r($service->clearLoginAgain('3c95811d6c45186b6b93bd78ff99fd942c34fd99'));exit;
@@ -46,8 +47,14 @@ class AuthService
         // 
         // print_r($service->delRefreshBlacklist('3c95811d6c45186b6b93bd78ff99fd942c34fd99'));exit;
         //设置解析token
-        $payload = $service->checkToken($token);
-
+        try{
+            $payload = $service->checkToken($token);
+        } catch (ExpiredException $e) {
+            throw new AuthException($e->getMessage());
+        } catch (\Throwable $e) {
+            throw new AuthException($e->getMessage());
+        }
+        
         $user = $this->model->find($payload->uid);
 
         return $user;
