@@ -28,7 +28,7 @@
         "workerman/channel": "^1.0",
         "firebase/php-jwt": "^6.3",
         "spatie/macroable": "^2.0",
-        "overtrue/wechat": "^6.9"
+        "w7corp/easywechat": "^6.9"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2",

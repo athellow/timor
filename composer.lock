@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad1d76780d1a0e85789aaa73fa724ada",
+    "content-hash": "5a2572a3161d64a6e512776f43d5db2d",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -912,107 +912,6 @@
                 }
             ],
             "time": "2022-10-12T07:45:37+00:00"
-        },
-        {
-            "name": "overtrue/wechat",
-            "version": "6.9.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/w7corp/easywechat.git",
-                "reference": "46d01b3650c2139815b76bf8ac58f3e08426c0f1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/w7corp/easywechat/zipball/46d01b3650c2139815b76bf8ac58f3e08426c0f1",
-                "reference": "46d01b3650c2139815b76bf8ac58f3e08426c0f1",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-fileinfo": "*",
-                "ext-libxml": "*",
-                "ext-openssl": "*",
-                "ext-simplexml": "*",
-                "ext-sodium": "*",
-                "monolog/monolog": "^2.2",
-                "nyholm/psr7": "^1.5",
-                "nyholm/psr7-server": "^1.0",
-                "overtrue/socialite": "^3.5|^4.0.1",
-                "php": ">=8.0.2",
-                "psr/http-client": "^1.0",
-                "psr/simple-cache": "^1.0|^2.0|^3.0",
-                "symfony/cache": "^5.4|^6.0",
-                "symfony/http-client": "^5.4|^6.0",
-                "symfony/http-foundation": "^5.4|^6.0",
-                "symfony/mime": "^5.4|^6.0",
-                "symfony/polyfill-php81": "^1.25",
-                "symfony/psr-http-message-bridge": "^2.1.2",
-                "thenorthmemory/xml": "^1.0"
-            },
-            "require-dev": {
-                "brainmaestro/composer-git-hooks": "^2.8",
-                "jetbrains/phpstorm-attributes": "^1.0",
-                "laravel/pint": "^1.2",
-                "mikey179/vfsstream": "^1.6",
-                "mockery/mockery": "^1.4.4",
-                "phpstan/phpstan": "^1.0",
-                "phpunit/phpunit": "^9.5",
-                "symfony/var-dumper": "^5.2"
-            },
-            "type": "library",
-            "extra": {
-                "hooks": {
-                    "pre-commit": [
-                        "composer check-style",
-                        "composer phpstan",
-                        "composer test"
-                    ],
-                    "pre-push": [
-                        "composer check-style"
-                    ],
-                    "config": {
-                        "stop-on-failure": [
-                            "pre-commit",
-                            "pre-push"
-                        ]
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "EasyWeChat\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "overtrue",
-                    "email": "anzhengchao@gmail.com"
-                }
-            ],
-            "description": "微信SDK",
-            "keywords": [
-                "easywechat",
-                "sdk",
-                "wechat",
-                "weixin",
-                "weixin-sdk"
-            ],
-            "support": {
-                "issues": "https://github.com/w7corp/easywechat/issues",
-                "source": "https://github.com/w7corp/easywechat/tree/6.9.1"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/overtrue",
-                    "type": "github"
-                }
-            ],
-            "abandoned": "w7corp/easywechat",
-            "time": "2022-10-14T08:23:35+00:00"
         },
         {
             "name": "php-http/message-factory",
@@ -3217,6 +3116,106 @@
                 "source": "https://github.com/top-think/think-worker/tree/v3.0.6"
             },
             "time": "2021-04-26T15:09:47+00:00"
+        },
+        {
+            "name": "w7corp/easywechat",
+            "version": "6.9.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/w7corp/easywechat.git",
+                "reference": "46d01b3650c2139815b76bf8ac58f3e08426c0f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/w7corp/easywechat/zipball/46d01b3650c2139815b76bf8ac58f3e08426c0f1",
+                "reference": "46d01b3650c2139815b76bf8ac58f3e08426c0f1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-fileinfo": "*",
+                "ext-libxml": "*",
+                "ext-openssl": "*",
+                "ext-simplexml": "*",
+                "ext-sodium": "*",
+                "monolog/monolog": "^2.2",
+                "nyholm/psr7": "^1.5",
+                "nyholm/psr7-server": "^1.0",
+                "overtrue/socialite": "^3.5|^4.0.1",
+                "php": ">=8.0.2",
+                "psr/http-client": "^1.0",
+                "psr/simple-cache": "^1.0|^2.0|^3.0",
+                "symfony/cache": "^5.4|^6.0",
+                "symfony/http-client": "^5.4|^6.0",
+                "symfony/http-foundation": "^5.4|^6.0",
+                "symfony/mime": "^5.4|^6.0",
+                "symfony/polyfill-php81": "^1.25",
+                "symfony/psr-http-message-bridge": "^2.1.2",
+                "thenorthmemory/xml": "^1.0"
+            },
+            "require-dev": {
+                "brainmaestro/composer-git-hooks": "^2.8",
+                "jetbrains/phpstorm-attributes": "^1.0",
+                "laravel/pint": "^1.2",
+                "mikey179/vfsstream": "^1.6",
+                "mockery/mockery": "^1.4.4",
+                "phpstan/phpstan": "^1.0",
+                "phpunit/phpunit": "^9.5",
+                "symfony/var-dumper": "^5.2"
+            },
+            "type": "library",
+            "extra": {
+                "hooks": {
+                    "pre-commit": [
+                        "composer check-style",
+                        "composer phpstan",
+                        "composer test"
+                    ],
+                    "pre-push": [
+                        "composer check-style"
+                    ],
+                    "config": {
+                        "stop-on-failure": [
+                            "pre-commit",
+                            "pre-push"
+                        ]
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "EasyWeChat\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "anzhengchao@gmail.com"
+                }
+            ],
+            "description": "微信SDK",
+            "keywords": [
+                "easywechat",
+                "sdk",
+                "wechat",
+                "weixin",
+                "weixin-sdk"
+            ],
+            "support": {
+                "issues": "https://github.com/w7corp/easywechat/issues",
+                "source": "https://github.com/w7corp/easywechat/tree/6.9.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/overtrue",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-10-14T08:23:35+00:00"
         },
         {
             "name": "workerman/channel",
